@@ -1,14 +1,13 @@
-import Image from "next/image";
-import { useState } from "react";
+import { useState } from 'react';
 
 export default function Home() {
   const [timeRes, setTimeRes] = useState<string | undefined>('none');
-  const getTime = async () =>{
+  const getTime = async () => {
     setTimeRes('loading...');
     const res = await fetch('/api/middleware');
     const data = await res.json();
     setTimeRes(data.currentTime);
-  }
+  };
 
   return (
     <main>
