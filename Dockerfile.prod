@@ -12,4 +12,4 @@ RUN pnpm build
 
 EXPOSE 3000
 
-CMD [ "npx", "next", "start",  "--https", "--ssl-cert", "each-star.com_bundle.pem", "--ssl-key", "each-star.com.key"]
+CMD [ "pnpm", "start"]
