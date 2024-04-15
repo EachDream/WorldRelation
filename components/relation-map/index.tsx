@@ -9,56 +9,52 @@ export default function RelationMap() {
   const mapEl = useRef(null);
   let graph: any = null;
 
-  const expData: MapData = transformRelationToMap(loadRelationFromFile());
-  const data = {
-    nodes: [
-      {
-        id: 'node1',
-        label: 'Circle1',
-      },
-      {
-        id: 'node2',
-        label: 'Circle2',
-      },
-    ],
-    edges: [
-      {
-        source: 'node1',
-        target: 'node2',
-      },
-    ],
-  };
+  const data: MapData = transformRelationToMap(loadRelationFromFile());
 
   useEffect(() => {
     if (!graph && mapEl.current) {
       graph = new G6.Graph({
         container: mapEl.current,
         modes: {
-          default: ['drag-canvas'],
+          default: ['drag-canvas', 'zoom-canvas', 'drag-node'],
         },
         layout: {
-          type: 'dagre',
-          direction: 'LR',
+          type: 'force',
+          preventOverlap: true,
+          nodeSpacing: 25,
         },
+
+        // 常用配置
+        fitView: true,
+        animate: true,
+
+        // 默认节点
         defaultNode: {
-          shape: 'node',
+          type: 'text',
+          size: 50,
+          style: {
+            fill: 'white',
+            opacity: 0.25,
+          },
           labelCfg: {
             style: {
-              fill: '#000000A6',
+              fill: 'black',
               fontSize: 10,
             },
           },
-          style: {
-            stroke: '#72CC4A',
-            width: 150,
-          },
         },
+
+        // 默认连接
         defaultEdge: {
           shape: 'polyline',
+          style: {
+            opacity: 0.15,
+            stroke: 'black',
+          },
         },
       });
     }
-    graph.data(expData);
+    graph.data(data);
     graph.render();
   }, []);
   return (
