@@ -21,7 +21,8 @@ export default function RelationMap() {
         layout: {
           type: 'force',
           preventOverlap: true,
-          nodeSpacing: 25,
+          nodeSpacing: 15,
+          edgeStrength: 0.1,
         },
 
         // 常用配置
@@ -52,10 +53,50 @@ export default function RelationMap() {
             stroke: 'black',
           },
         },
+
+        // hover 效果
+        nodeStateStyles: {
+          hover: {
+            fill: 'lightsteelblue',
+          },
+          click: {
+            stroke: '#000',
+            lineWidth: 1,
+          },
+        },
+        edgeStateStyles: {
+          click: {
+            stroke: 'steelblue',
+          },
+        },
       });
     }
     graph.data(data);
     graph.render();
+
+    /**
+     * 监听 mouse region
+     */
+    graph.on('node:mouseenter', (e: any) => {
+      const nodeItem = e.item;
+      graph.setItemState(nodeItem, 'hover', true);
+    });
+    graph.on('node:mouseleave', (e: any) => {
+      const nodeItem = e.item;
+      graph.setItemState(nodeItem, 'hover', false);
+    });
+
+    /**
+     * 监听 mouse click
+     */
+    graph.on('node:click', (e: any) => {
+      const clickNodes = graph.findAllByState('node', 'click');
+      clickNodes.forEach((cn: any) => {
+        graph.setItemState(cn, 'click', false);
+      });
+      const nodeItem = e.item;
+      graph.setItemState(nodeItem, 'click', true);
+    });
   }, []);
   return (
     <div className={styles.container}>
