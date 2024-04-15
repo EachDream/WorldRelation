@@ -58,10 +58,12 @@ export default function RelationMap() {
         nodeStateStyles: {
           hover: {
             fill: 'lightsteelblue',
+            size: 60, // Increase node size on hover
           },
           click: {
             stroke: '#000',
             lineWidth: 1,
+            size: 70, // Increase node size on click
           },
         },
         edgeStateStyles: {
