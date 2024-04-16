@@ -17,10 +17,11 @@ export const mapAppearenceConfig = {
 
   // 默认连接
   defaultEdge: {
-    shape: 'polyline',
+    shape: 'line',
     style: {
-      opacity: 0.15,
-      stroke: 'black',
+      endArrow: true,
+      lineWidth: 10,
+      stroke: '#ddd',
     },
   },
 

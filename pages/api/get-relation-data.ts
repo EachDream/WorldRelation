@@ -9,7 +9,7 @@ export const getRelationDataFromDebugFolder = (
   try {
     const fileContent = fs.readFileSync(filePath, 'utf-8');
     const fileContentArray = fileContent.split('\n');
-    const first100Items = fileContentArray.slice(0, 500);
+    const first100Items = fileContentArray.slice(0, 50);
     return first100Items;
   } catch (error) {}
 };
