@@ -4,7 +4,6 @@ import { loadRelationFromFile } from '@/utils/load-relation';
 import { transformRelationToMap } from '@/utils/relation-to-map';
 import G6, { Graph } from '@antv/g6';
 import router from 'next/router';
-import { useRef } from 'react';
 
 const onMouseEnterHook = (node: any) => {
   // do something
@@ -13,14 +12,18 @@ const onMouseLeaveHook = (node: any) => {
   // do something
 };
 const onClickHook = (node: any) => {
-  // do something
   router.push(node?.id ? `?p=${node.id}` : ``);
 };
 
 export const useRelationMap = () => {
   let graph: Graph | null = null;
 
-  const init = (el: string | HTMLElement) => {
+  const renderData = (d: MapData) => {
+    graph?.data(d as any);
+    graph?.render();
+  };
+
+  const init = async (el: string | HTMLElement) => {
     if (!graph) {
       graph = new G6.Graph({
         container: el,
@@ -39,9 +42,10 @@ export const useRelationMap = () => {
       });
     }
     if (graph) {
-      const data: MapData = transformRelationToMap(loadRelationFromFile());
-      graph.data(data as any);
-      graph.render();
+      const data: MapData = transformRelationToMap(
+        await loadRelationFromFile(),
+      );
+      renderData(data);
 
       /**
        * 监听 mouse region
@@ -77,5 +81,5 @@ export const useRelationMap = () => {
     }
   };
 
-  return { init };
+  return { init, renderData };
 };

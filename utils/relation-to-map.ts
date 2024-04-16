@@ -5,6 +5,8 @@ export const transformRelationToMap = (relations: Relation[]): MapData => {
   let nodes: MapNode[] = [];
   let edges: MapEdge[] = [];
 
+  console.log(relations);
+
   relations.forEach((r: Relation) => {
     const { source, target } = r;
     const sourceName = source.name;
