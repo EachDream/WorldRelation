@@ -22,11 +22,11 @@ jobs:
 
       - name: Copy SSL Certificates
         env:
-          CERTIFICATE_CONTENT: ${{ secrets.WORLD_RELATION_SSL_PEM }}
-          KEY_CONTENT: ${{ secrets.WORLD_RELATION_SSL_KEY }}
+          CERTIFICATE_CONTENT: ${{ secrets.SSL_PEM }}
+          KEY_CONTENT: ${{ secrets.SSL_KEY }}
         run: |
-          echo "$CERTIFICATE_CONTENT" > world-relation.each-star.com_bundle.pem
-          echo "$KEY_CONTENT" > world-relation.each-star.com.key
+          echo "$CERTIFICATE_CONTENT" > each-star.com_bundle.pem
+          echo "$KEY_CONTENT" > each-star.com.key
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v3

@@ -9,8 +9,8 @@ const handle = app.getRequestHandler();
 /**
 * SSL_KEY_FILE and SSL_CRT_FILE are ...
 */
-const privateKeyPath = './world-relation.each-star.com.key';
-const certificatePath = './world-relation.each-star.com_bundle.pem';
+const privateKeyPath = './each-star.com.key';
+const certificatePath = './each-star.com_bundle.pem';
 
 const port = 3000;
 
