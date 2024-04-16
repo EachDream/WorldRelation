@@ -1,11 +1,20 @@
 import { WorldRelationQuestionQuery } from '@/types/question';
+import { loadRelationFromFile } from '@/utils/load-relation';
 import { useState } from 'react';
+import { useRouter } from 'next/router';
+import { Relation } from '@/types/relation';
 import styles from './index.module.scss';
 
 export default function Question() {
+  const router = useRouter();
   const [form, setForm] = useState<WorldRelationQuestionQuery>({
     name: '',
   });
+
+  const goQueryPage = (form: WorldRelationQuestionQuery) => {
+    router.push(form?.name ? `?p=${form.name}` : ``);
+    const res: Relation[] = loadRelationFromFile();
+  };
 
   return (
     <div className="flex items-center gap-3">
@@ -16,7 +25,7 @@ export default function Question() {
         className={styles.input}
         onChange={(e) => setForm({ name: e.target.value })}
       />
-      <button className="flex items-center">
+      <button onClick={() => goQueryPage(form)} className="flex items-center">
         <svg
           style={{ width: '30px', height: '30px', color: 'white' }}
           xmlns="http://www.w3.org/2000/svg"
