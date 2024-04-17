@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div className="w-full h-[100vh] flex items-center flex-col justify-start gap-4 pt-12">
       <Question />
-      <MockupBrowser url={'nihao'}>
+      <MockupBrowser url={'https://each-star.com'}>
         <RelationMap />
       </MockupBrowser>
     </div>
