@@ -1,12 +1,8 @@
 export const mapAppearenceConfig = {
   // 默认节点
   defaultNode: {
-    type: 'text',
-    size: 50,
-    style: {
-      fill: 'white',
-      opacity: 0.25,
-    },
+    type: 'bubble',
+    size: 70,
     labelCfg: {
       style: {
         fill: 'black',
