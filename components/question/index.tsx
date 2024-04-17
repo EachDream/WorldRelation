@@ -18,16 +18,30 @@ export default function Question() {
 
   return (
     <div className="flex items-center gap-3">
-      <input
-        type="text"
-        placeholder="输入你想要查找的人名"
-        value={form.name}
-        className={styles.input}
-        onChange={(e) => setForm({ name: e.target.value })}
-      />
-      <button onClick={() => goQueryPage(form)} className="flex items-center">
+      {/* 输入框 */}
+      <label className="input input-bordered flex items-center gap-2 shadow-md">
+        <input
+          type="text"
+          className="grow"
+          value={form.name}
+          onChange={(e) => setForm({ name: e.target.value })}
+          placeholder="输入你想要查找的人名"
+        />
+        <kbd className="kbd kbd-sm">⌘</kbd>
+        <kbd className="kbd kbd-sm">K</kbd>
+      </label>
+
+      {/* 查询按钮 */}
+      <button
+        onClick={() => goQueryPage(form)}
+        className="btn flex items-center shadow-md"
+      >
         <svg
-          style={{ width: '30px', height: '30px', color: 'white' }}
+          style={{
+            width: '21px',
+            height: '21px',
+            color: 'gray',
+          }}
           xmlns="http://www.w3.org/2000/svg"
           width="1em"
           height="1em"
