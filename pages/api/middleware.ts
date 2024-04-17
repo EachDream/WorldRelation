@@ -5,6 +5,6 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const data = getRelationDataFromDebugFolder();
+  const data = getRelationDataFromDebugFolder({ name: '' });
   res.status(200).json(data);
 }

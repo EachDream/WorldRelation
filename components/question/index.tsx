@@ -11,9 +11,9 @@ export default function Question() {
     name: '',
   });
 
-  const goQueryPage = (form: WorldRelationQuestionQuery) => {
+  const goQueryPage = async (form: WorldRelationQuestionQuery) => {
     router.push(form?.name ? `?p=${form.name}` : ``);
-    const res: Relation[] = loadRelationFromFile();
+    const res: Relation[] = await loadRelationFromFile();
   };
 
   return (
