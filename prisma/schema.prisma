@@ -1,0 +1,19 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model relation_main {
+  id          Int       @id @default(autoincrement())
+  father_node String?   @db.VarChar(255)
+  son_node    String?   @db.VarChar(255)
+  relation    String?   @db.VarChar(255)
+  create_time DateTime  @default(now()) @db.Timestamp(0)
+  update_time DateTime  @default(now()) @db.DateTime(0)
+  deleted_at  DateTime? @db.DateTime(0)
+}

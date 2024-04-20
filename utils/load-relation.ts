@@ -1,18 +1,19 @@
 import { Relation, RelationUnit } from '@/types/relation';
 
 export const loadRelationFromFile = async () => {
-  const res: Response = await fetch('/api/middleware');
-  const lines: string[] = await res.json();
+  const res:  {[key: string]: any}[] = await fetch('/api/middleware').then(response => response.json())
+  .then(data => data as {[key: string]: any}[]);
 
-  const dataWithoutLineHeader = lines.slice(1) as string[];
+  const dataWithoutLineHeader = res as any[];
 
   const relations: Relation[] = dataWithoutLineHeader
-    .map<Relation | undefined>((line) => {
-      if (!line) {
+    .map<Relation | undefined>((item) => {
+      if (!item) {
         return;
       }
-
-      const [source, relation, relation_other, target] = line.split(',');
+      const source = item.father_node
+      const target = item.son_node
+      const relation = item.relation
       return {
         source: { name: source } as RelationUnit,
         target: { name: target } as RelationUnit,
